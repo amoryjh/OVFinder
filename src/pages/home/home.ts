@@ -10,18 +10,18 @@ import 'rxjs/add/operator/map';
 })
 export class HomePage {
     films: Observable<any>;
-    beers: Observable<any>;
+    // beers: Observable<any>;
 
     constructor(public navCtrl: NavController, public apiProvider: ApiProvider) {
         this.films = this.apiProvider.getFilms();
         // this.beers = this.apiProvider.getBeers();
     }
 
-    openOVDetails(beer) {
-        this.navCtrl.push('OvStoreDetailsPage', { beer: beer });
-    }
+    // openOVDetails(beer) {
+    //     this.navCtrl.push('OvStoreDetailsPage', { beer: beer });
+    // }
 
-    openDetails(film) {
+    openFilmDetails(film) {
         this.navCtrl.push('FilmDetailsPage', { film: film });
     }
 }
