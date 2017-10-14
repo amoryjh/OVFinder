@@ -1,4 +1,4 @@
-webpackJsonp([2],{
+webpackJsonp([1],{
 
 /***/ 107:
 /***/ (function(module, exports) {
@@ -21,12 +21,8 @@ webpackEmptyAsyncContext.id = 107;
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"../pages/film-details/film-details.module": [
-		266,
-		1
-	],
 	"../pages/ov-store-details/ov-store-details.module": [
-		267,
+		266,
 		0
 	]
 };
@@ -73,20 +69,16 @@ var HomePage = (function () {
     function HomePage(navCtrl, apiProvider) {
         this.navCtrl = navCtrl;
         this.apiProvider = apiProvider;
-        this.films = this.apiProvider.getFilms();
         this.beers = this.apiProvider.getBeers();
     }
     HomePage.prototype.openOVDetails = function (beer) {
         this.navCtrl.push('OvStoreDetailsPage', { beer: beer });
     };
-    HomePage.prototype.openFilmDetails = function (film) {
-        this.navCtrl.push('FilmDetailsPage', { film: film });
-    };
     return HomePage;
 }());
 HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"/Users/joshhanson/Documents/OVFinder/src/pages/home/home.html"*/'<ion-header>\n    <ion-navbar>\n        <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n        <ion-title>Home</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <ion-list>\n        <button ion-item *ngFor="let film of (films | async)?.results" (click)="openFilmDetails(film)">\n            {{ film.title }}\n        </button>\n    </ion-list>\n\n    <ion-list>\n        <button ion-item *ngFor="let beer of (beers | async)?.results" (click)="openOVDetails(beer)">\n            {{ beer.name }}\n        </button>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/joshhanson/Documents/OVFinder/src/pages/home/home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"/Users/joshhanson/Documents/OVFinder/src/pages/home/home.html"*/'<ion-header>\n    <ion-navbar>\n        <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n        <ion-title>Home</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <ion-list>\n        <button ion-item *ngFor="let beer of (beers | async)?.result" (click)="openOVDetails(beer)">\n            {{ beer.name }}\n        </button>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/joshhanson/Documents/OVFinder/src/pages/home/home.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_0__providers_api_api__["a" /* ApiProvider */]])
 ], HomePage);
@@ -120,9 +112,6 @@ var ApiProvider = (function () {
     function ApiProvider(http) {
         this.http = http;
     }
-    ApiProvider.prototype.getFilms = function () {
-        return this.http.get('https://swapi.co/api/films').map(function (res) { return res.json(); });
-    };
     ApiProvider.prototype.getBeers = function () {
         return this.http.get('https://lcboapi.com/products?access_key=MDpiYTFjODVhNi1iMDY4LTExZTctOGNhMS0yYjM2ZTNlMDFjY2E6c2J4eVVBVWdFbk1zNUhvUG9ralQ3ZmQ3N2Q1N0FOYzBZY0RL').map(function (res) { return res.json(); });
     };
@@ -255,7 +244,6 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_8__angular_http__["b" /* HttpModule */],
             __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */], {}, {
                 links: [
-                    { loadChildren: '../pages/film-details/film-details.module#FilmDetailsPageModule', name: 'FilmDetailsPage', segment: 'film-details', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/ov-store-details/ov-store-details.module#OvStoreDetailsPageModule', name: 'OvStoreDetailsPage', segment: 'ov-store-details', priority: 'low', defaultHistory: [] }
                 ]
             }),

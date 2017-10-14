@@ -9,7 +9,7 @@
 
 <ion-content>
     <ion-list>
-        <button ion-item *ngFor="let beer of (beers | async)?.results" (click)="openOVDetails(beer)">
+        <button ion-item *ngFor="let beer of (beers | async)?.result" (click)="openOVDetails(beer)">
             {{ beer.name }}
         </button>
     </ion-list>
