@@ -86,7 +86,7 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"/Users/joshhanson/Documents/OVFinder/src/pages/home/home.html"*/'<ion-header>\n    <ion-navbar>\n        <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n        <ion-title>Home</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n    \n\n    <ion-list>\n        <button ion-item *ngFor="let beer of (beers | async)?.results" (click)="openOVDetails(beer)">\n            {{ beer.name }}\n        </button>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/joshhanson/Documents/OVFinder/src/pages/home/home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"/Users/joshhanson/Documents/OVFinder/src/pages/home/home.html"*/'<ion-header>\n    <ion-navbar>\n        <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n        <ion-title>Home</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <!-- <ion-list>\n        <button ion-item *ngFor="let film of (films | async)?.results" (click)="openFilmDetails(film)">\n            {{ film.title }}\n        </button>\n    </ion-list> -->\n\n    <ion-list>\n        <button ion-item *ngFor="let beer of (beers | async)?.results" (click)="openOVDetails(beer)">\n            {{ beer.name }}\n        </button>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/joshhanson/Documents/OVFinder/src/pages/home/home.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_0__providers_api_api__["a" /* ApiProvider */]])
 ], HomePage);
@@ -124,7 +124,7 @@ var ApiProvider = (function () {
         return this.http.get('https://swapi.co/api/films').map(function (res) { return res.json(); });
     };
     ApiProvider.prototype.getBeers = function () {
-        return this.http.get('https://lcboapi.com/stores?product_id=438457&access_key=MDpiYTFjODVhNi1iMDY4LTExZTctOGNhMS0yYjM2ZTNlMDFjY2E6c2J4eVVBVWdFbk1zNUhvUG9ralQ3ZmQ3N2Q1N0FOYzBZY0RL').map(function (res) { return res.json(); });
+        return this.http.get('https://lcboapi.com/products?access_key=MDpiYTFjODVhNi1iMDY4LTExZTctOGNhMS0yYjM2ZTNlMDFjY2E6c2J4eVVBVWdFbk1zNUhvUG9ralQ3ZmQ3N2Q1N0FOYzBZY0RL').map(function (res) { return res.json(); });
     };
     return ApiProvider;
 }());
