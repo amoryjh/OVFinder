@@ -23,8 +23,4 @@ export class OvStoreDetailsPage {
 
         return (addressTwo == null ? addressOne : addressOne + ", " + addressTwo);
     }
-
-    ionViewDidLoad() {
-        console.log('ionViewDidLoad OvStoreDetailsPage');
-    }
 }
