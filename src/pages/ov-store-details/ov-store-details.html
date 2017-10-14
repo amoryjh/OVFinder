@@ -17,9 +17,8 @@
                 {{ beer.city }}
             </p>
             <p>
-                {{"Distance: " + convertMetersToKM(beer.distance_in_meters)}}
+                {{ convertMetersToKM(beer.distance_in_meters + " away")}}
             </p>
-
             <p>
                 {{ beer.telephone }}
             </p>
