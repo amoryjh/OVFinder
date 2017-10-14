@@ -62,6 +62,13 @@ var OvStoreDetailsPage = (function () {
         this.navParams = navParams;
         this.beer = this.navParams.get("beer");
     }
+    OvStoreDetailsPage.prototype.convertMetersToKM = function (beer) {
+        return (beer / 1000).toFixed(2) + "KM";
+    };
+    OvStoreDetailsPage.prototype.formatStoreAddress = function (beer) {
+        var addressOne = beer.address_line_1, addressTwo = beer.address_line_2;
+        return (addressTwo == null ? addressOne : addressOne + ", " + addressTwo);
+    };
     OvStoreDetailsPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad OvStoreDetailsPage');
     };
@@ -69,7 +76,7 @@ var OvStoreDetailsPage = (function () {
 }());
 OvStoreDetailsPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-ov-store-details',template:/*ion-inline-start:"/Users/joshhanson/Documents/OVFinder/src/pages/ov-store-details/ov-store-details.html"*/'<ion-header>\n    <ion-navbar color="primary">\n        <ion-title>{{ beer.name }}</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n    <ion-card>\n        <ion-card-content>\n            <ion-card-title>\n                {{ beer.name }}\n            </ion-card-title>\n            <p>\n                {{ beer.address_line_1 + " " + beer.address_line_2 }}\n            </p>\n            <p>\n                {{ beer.city }}\n            </p>\n            <p>\n                {{ beer.telephone }}\n            </p>\n            <p>\n                {{"Has bilingual services: " + beer.has_bilingual_services }}\n            </p>\n        </ion-card-content>\n    </ion-card>\n</ion-content>'/*ion-inline-end:"/Users/joshhanson/Documents/OVFinder/src/pages/ov-store-details/ov-store-details.html"*/,
+        selector: 'page-ov-store-details',template:/*ion-inline-start:"/Users/joshhanson/Documents/OVFinder/src/pages/ov-store-details/ov-store-details.html"*/'<ion-header>\n    <ion-navbar color="primary">\n        <ion-title>{{ beer.name }}</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n    <ion-card>\n        <ion-card-content>\n            <ion-card-title>\n                {{ beer.name }}\n            </ion-card-title>\n            <p>\n                {{ formatStoreAddress(beer) }}\n            </p>\n            <p>\n                {{ beer.city }}\n            </p>\n            <p>\n                {{"Distance: " + convertMetersToKM(beer.distance_in_meters)}}\n            </p>\n\n            <p>\n                {{ beer.telephone }}\n            </p>\n            <p>\n                {{"Has bilingual services: " + beer.has_bilingual_services }}\n            </p>\n        </ion-card-content>\n    </ion-card>\n</ion-content>'/*ion-inline-end:"/Users/joshhanson/Documents/OVFinder/src/pages/ov-store-details/ov-store-details.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
 ], OvStoreDetailsPage);

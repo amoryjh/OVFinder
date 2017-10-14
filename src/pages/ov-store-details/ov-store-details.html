@@ -11,11 +11,15 @@
                 {{ beer.name }}
             </ion-card-title>
             <p>
-                {{ beer.address_line_1 + " " + beer.address_line_2 }}
+                {{ formatStoreAddress(beer) }}
             </p>
             <p>
                 {{ beer.city }}
             </p>
+            <p>
+                {{"Distance: " + convertMetersToKM(beer.distance_in_meters)}}
+            </p>
+
             <p>
                 {{ beer.telephone }}
             </p>

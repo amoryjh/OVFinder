@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content padding>
-    <h5 padding>Woah, so this here is a work in progress - it will feature the ability to detect your location and base the store results off that in a future version. <br> For now the results below are all hard coded based on a location in Toronto.</h5>
+    <h6 padding>Woah, so this here is a work in progress - it will feature the ability to detect your location and base the store results off that in a future version. <br> For now the results below are all hard coded based on a location in Toronto.</h6>
     <ion-card>
         <ion-card-content>
             <ion-card-title>
@@ -23,7 +23,7 @@
 
     <ion-list>
         <button ion-item *ngFor="let beer of (beers | async)?.result" (click)="openOVDetails(beer)">
-            {{ beer.name + " - " + beer.city + " Quantity: " + beer.quantity }} 
+            {{ beer.name + " - " + " QTY: " + beer.quantity }} 
         </button>
     </ion-list>
 </ion-content>

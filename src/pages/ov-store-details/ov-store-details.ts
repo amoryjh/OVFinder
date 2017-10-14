@@ -13,6 +13,17 @@ export class OvStoreDetailsPage {
         this.beer = this.navParams.get("beer");
     }
 
+    convertMetersToKM(beer) {
+        return (beer / 1000).toFixed(2) + "KM";
+    }
+
+    formatStoreAddress(beer) {
+        var addressOne = beer.address_line_1,
+            addressTwo = beer.address_line_2;
+
+        return (addressTwo == null ? addressOne : addressOne + ", " + addressTwo);
+    }
+
     ionViewDidLoad() {
         console.log('ionViewDidLoad OvStoreDetailsPage');
     }
