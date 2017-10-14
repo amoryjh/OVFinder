@@ -7,10 +7,23 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+    <h5 padding>Woah, so this here is a work in progress - it will feature the ability to detect your location and base the store results off that in a future version. <br> For now the results below are all hard coded based on a location in Toronto.</h5>
+    <ion-card>
+        <ion-card-content>
+            <ion-card-title>
+                {{ ovName }}
+            </ion-card-title>
+            <p>{{ ovTasting }} </p>
+            <p> Only the greatest beer of all time</p>
+        </ion-card-content>
+    </ion-card>
+
+    <h3 padding>Locations this fine beer is found: </h3>
+
     <ion-list>
         <button ion-item *ngFor="let beer of (beers | async)?.result" (click)="openOVDetails(beer)">
-            {{ beer.name }}
+            {{ beer.name + " - " + beer.city + " Quantity: " + beer.quantity }} 
         </button>
     </ion-list>
 </ion-content>

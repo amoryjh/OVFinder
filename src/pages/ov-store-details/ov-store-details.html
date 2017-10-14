@@ -11,7 +11,16 @@
                 {{ beer.name }}
             </ion-card-title>
             <p>
-                <!-- {{ film.name }} -->
+                {{ beer.address_line_1 + " " + beer.address_line_2 }}
+            </p>
+            <p>
+                {{ beer.city }}
+            </p>
+            <p>
+                {{ beer.telephone }}
+            </p>
+            <p>
+                {{"Has bilingual services: " + beer.has_bilingual_services }}
             </p>
         </ion-card-content>
     </ion-card>

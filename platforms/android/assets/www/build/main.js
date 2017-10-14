@@ -67,9 +67,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var HomePage = (function () {
     function HomePage(navCtrl, apiProvider) {
+        var _this = this;
         this.navCtrl = navCtrl;
         this.apiProvider = apiProvider;
         this.beers = this.apiProvider.getBeers();
+        this.ovs = this.apiProvider.getOV();
+        this.ovs.subscribe(function (data) {
+            _this.ovName = data.result.name;
+            _this.ovTasting = data.result.varietal;
+        });
     }
     HomePage.prototype.openOVDetails = function (beer) {
         this.navCtrl.push('OvStoreDetailsPage', { beer: beer });
@@ -78,7 +84,7 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"/Users/joshhanson/Documents/OVFinder/src/pages/home/home.html"*/'<ion-header>\n    <ion-navbar>\n        <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n        <ion-title>Home</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <ion-list>\n        <button ion-item *ngFor="let beer of (beers | async)?.result" (click)="openOVDetails(beer)">\n            {{ beer.name }}\n        </button>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/joshhanson/Documents/OVFinder/src/pages/home/home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"/Users/joshhanson/Documents/OVFinder/src/pages/home/home.html"*/'<ion-header>\n    <ion-navbar>\n        <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n        <ion-title>Home</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n    <h5 padding>Woah, so this here is a work in progress - it will feature the ability to detect your location and base the store results off that in a future version. <br> For now the results below are all hard coded based on a location in Toronto.</h5>\n    <ion-card>\n        <ion-card-content>\n            <ion-card-title>\n                {{ ovName }}\n            </ion-card-title>\n            <p>{{ ovTasting }} </p>\n            <p> Only the greatest beer of all time</p>\n        </ion-card-content>\n    </ion-card>\n\n    <h3 padding>Locations this fine beer is found: </h3>\n\n    <ion-list>\n        <button ion-item *ngFor="let beer of (beers | async)?.result" (click)="openOVDetails(beer)">\n            {{ beer.name + " - " + beer.city + " Quantity: " + beer.quantity }} \n        </button>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/joshhanson/Documents/OVFinder/src/pages/home/home.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_0__providers_api_api__["a" /* ApiProvider */]])
 ], HomePage);
@@ -114,6 +120,9 @@ var ApiProvider = (function () {
     }
     ApiProvider.prototype.getBeers = function () {
         return this.http.get('https://lcboapi.com/stores?access_key=MDpiYTFjODVhNi1iMDY4LTExZTctOGNhMS0yYjM2ZTNlMDFjY2E6c2J4eVVBVWdFbk1zNUhvUG9ralQ3ZmQ3N2Q1N0FOYzBZY0RL&lat=43.65838&lon=-79.44335&product_id=438457').map(function (res) { return res.json(); });
+    };
+    ApiProvider.prototype.getOV = function () {
+        return this.http.get('https://lcboapi.com/products/460881?access_key=MDpiYTFjODVhNi1iMDY4LTExZTctOGNhMS0yYjM2ZTNlMDFjY2E6c2J4eVVBVWdFbk1zNUhvUG9ralQ3ZmQ3N2Q1N0FOYzBZY0RL').map(function (res) { return res.json(); });
     };
     return ApiProvider;
 }());
