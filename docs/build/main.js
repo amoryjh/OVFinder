@@ -113,7 +113,7 @@ var ApiProvider = (function () {
         this.http = http;
     }
     ApiProvider.prototype.getBeers = function () {
-        return this.http.get('https://lcboapi.com/products?access_key=MDpiYTFjODVhNi1iMDY4LTExZTctOGNhMS0yYjM2ZTNlMDFjY2E6c2J4eVVBVWdFbk1zNUhvUG9ralQ3ZmQ3N2Q1N0FOYzBZY0RL').map(function (res) { return res.json(); });
+        return this.http.get('https://lcboapi.com/stores?lat=43.65838&lon=-79.44335&product_id=438457?access_key=MDpiYTFjODVhNi1iMDY4LTExZTctOGNhMS0yYjM2ZTNlMDFjY2E6c2J4eVVBVWdFbk1zNUhvUG9ralQ3ZmQ3N2Q1N0FOYzBZY0RL').map(function (res) { return res.json(); });
     };
     return ApiProvider;
 }());
