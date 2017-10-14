@@ -73,24 +73,22 @@ var HomePage = (function () {
     function HomePage(navCtrl, apiProvider) {
         this.navCtrl = navCtrl;
         this.apiProvider = apiProvider;
-        this.films = this.apiProvider.getFilms();
+        // this.films = this.apiProvider.getFilms();
         this.beers = this.apiProvider.getBeers();
     }
     HomePage.prototype.openOVDetails = function (beer) {
         this.navCtrl.push('OvStoreDetailsPage', { beer: beer });
     };
-    HomePage.prototype.openFilmDetails = function (film) {
-        this.navCtrl.push('FilmDetailsPage', { film: film });
-    };
     return HomePage;
 }());
 HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"/Users/joshhanson/Documents/OVFinder/src/pages/home/home.html"*/'<ion-header>\n    <ion-navbar>\n        <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n        <ion-title>Home</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <ion-list>\n        <button ion-item *ngFor="let film of (films | async)?.results" (click)="openFilmDetails(film)">\n            {{ film.title }}\n        </button>\n    </ion-list>\n\n    <ion-list>\n        <button ion-item *ngFor="let beer of (beers | async)?.results" (click)="openOVDetails(beer)">\n            {{ beer.name }}\n        </button>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/joshhanson/Documents/OVFinder/src/pages/home/home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"/Users/joshhanson/Documents/OVFinder/src/pages/home/home.html"*/'<ion-header>\n    <ion-navbar>\n        <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n        <ion-title>Home</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <ion-list>\n        <button ion-item *ngFor="let beer of (beers | async)?.results" (click)="openOVDetails(beer)">\n            {{ beer.name }}\n        </button>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/joshhanson/Documents/OVFinder/src/pages/home/home.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_0__providers_api_api__["a" /* ApiProvider */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__providers_api_api__["a" /* ApiProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__providers_api_api__["a" /* ApiProvider */]) === "function" && _b || Object])
 ], HomePage);
 
+var _a, _b;
 //# sourceMappingURL=home.js.map
 
 /***/ }),
@@ -120,9 +118,9 @@ var ApiProvider = (function () {
     function ApiProvider(http) {
         this.http = http;
     }
-    ApiProvider.prototype.getFilms = function () {
-        return this.http.get('https://swapi.co/api/films').map(function (res) { return res.json(); });
-    };
+    // getFilms() {
+    //     return this.http.get('https://swapi.co/api/films').map(res => res.json());
+    // }
     ApiProvider.prototype.getBeers = function () {
         return this.http.get('https://lcboapi.com/products?access_key=MDpiYTFjODVhNi1iMDY4LTExZTctOGNhMS0yYjM2ZTNlMDFjY2E6c2J4eVVBVWdFbk1zNUhvUG9ralQ3ZmQ3N2Q1N0FOYzBZY0RL').map(function (res) { return res.json(); });
     };
@@ -130,9 +128,10 @@ var ApiProvider = (function () {
 }());
 ApiProvider = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]) === "function" && _a || Object])
 ], ApiProvider);
 
+var _a;
 //# sourceMappingURL=api.js.map
 
 /***/ }),

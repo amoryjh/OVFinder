@@ -9,11 +9,11 @@ import 'rxjs/add/operator/map';
     templateUrl: 'home.html'
 })
 export class HomePage {
-    films: Observable<any>;
+    // films: Observable<any>;
     beers: Observable<any>;
 
     constructor(public navCtrl: NavController, public apiProvider: ApiProvider) {
-        this.films = this.apiProvider.getFilms();
+        // this.films = this.apiProvider.getFilms();
         this.beers = this.apiProvider.getBeers();
     }
 
@@ -21,7 +21,7 @@ export class HomePage {
         this.navCtrl.push('OvStoreDetailsPage', { beer: beer });
     }
 
-    openFilmDetails(film) {
-        this.navCtrl.push('FilmDetailsPage', { film: film });
-    }
+    // openFilmDetails(film) {
+    //     this.navCtrl.push('FilmDetailsPage', { film: film });
+    // }
 }
