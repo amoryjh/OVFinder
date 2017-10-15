@@ -119,16 +119,10 @@ var ApiProvider = (function () {
         this.http = http;
     }
     ApiProvider.prototype.getBeers = function () {
-        //Web App
-        //return this.http.get('https://lcboapi.com/stores?access_key=MDpiYTFjODVhNi1iMDY4LTExZTctOGNhMS0yYjM2ZTNlMDFjY2E6c2J4eVVBVWdFbk1zNUhvUG9ralQ3ZmQ3N2Q1N0FOYzBZY0RL&lat=43.65838&lon=-79.44335&product_id=460881').map(res => res.json()); 
-        //Mobile App
-        return this.http.get('https://lcboapi.com/stores?access_key=MDoyMGY2MTRiOC1iMTMxLTExZTctODg0YS00MzU1MGE3ZDdjNzM6Y29pS21WZjhuVzZyV2E1THJEWHlvY2x0OXNlQ0FzNGplUnZ3&lat=43.65838&lon=-79.44335&product_id=460881').map(function (res) { return res.json(); });
+        return this.http.get('https://lcboapi.com/stores?access_key=MDpiYTFjODVhNi1iMDY4LTExZTctOGNhMS0yYjM2ZTNlMDFjY2E6c2J4eVVBVWdFbk1zNUhvUG9ralQ3ZmQ3N2Q1N0FOYzBZY0RL&lat=43.65838&lon=-79.44335&product_id=460881').map(function (res) { return res.json(); });
     };
     ApiProvider.prototype.getOV = function () {
-        //Web App
-        // return this.http.get('https://lcboapi.com/products/460881?access_key=MDpiYTFjODVhNi1iMDY4LTExZTctOGNhMS0yYjM2ZTNlMDFjY2E6c2J4eVVBVWdFbk1zNUhvUG9ralQ3ZmQ3N2Q1N0FOYzBZY0RL').map(res => res.json());
-        //Mobile App
-        return this.http.get('https://lcboapi.com/products/460881?access_key=MDoyMGY2MTRiOC1iMTMxLTExZTctODg0YS00MzU1MGE3ZDdjNzM6Y29pS21WZjhuVzZyV2E1THJEWHlvY2x0OXNlQ0FzNGplUnZ3').map(function (res) { return res.json(); });
+        return this.http.get('https://lcboapi.com/products/460881?access_key=MDpiYTFjODVhNi1iMDY4LTExZTctOGNhMS0yYjM2ZTNlMDFjY2E6c2J4eVVBVWdFbk1zNUhvUG9ralQ3ZmQ3N2Q1N0FOYzBZY0RL').map(function (res) { return res.json(); });
     };
     return ApiProvider;
 }());
