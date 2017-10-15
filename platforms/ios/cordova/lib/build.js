@@ -26,7 +26,6 @@ var plist = require('plist');
 var util = require('util');
 
 var check_reqs = require('./check_reqs');
-var projectFile = require('./projectFile');
 
 var events = require('cordova-common').events;
 
@@ -97,7 +96,7 @@ module.exports.run = function (buildOpts) {
             var buildType = buildOpts.release ? 'release' : 'debug';
             var config = buildConfig.ios[buildType];
             if (config) {
-                ['codeSignIdentity', 'codeSignResourceRules', 'provisioningProfile', 'developmentTeam', 'packageType', 'buildFlag', 'iCloudContainerEnvironment'].forEach(
+                ['codeSignIdentity', 'codeSignResourceRules', 'provisioningProfile', 'developmentTeam', 'packageType', 'buildFlag'].forEach(
                     function (key) {
                         buildOpts[key] = buildOpts[key] || config[key];
                     });
@@ -180,33 +179,14 @@ module.exports.run = function (buildOpts) {
                 return;
             }
 
-            var locations = {
-                root: projectPath,
-                pbxproj: path.join(projectPath, projectName + '.xcodeproj', 'project.pbxproj')
-            };
-
-            var bundleIdentifier = projectFile.parse(locations).getPackageName();
             var exportOptions = {'compileBitcode': false, 'method': 'development'};
 
             if (buildOpts.packageType) {
                 exportOptions.method = buildOpts.packageType;
             }
 
-            if (buildOpts.iCloudContainerEnvironment) {
-                exportOptions.iCloudContainerEnvironment = buildOpts.iCloudContainerEnvironment;
-            }
-
             if (buildOpts.developmentTeam) {
                 exportOptions.teamID = buildOpts.developmentTeam;
-            }
-
-            if (buildOpts.provisioningProfile && bundleIdentifier) {
-                exportOptions.provisioningProfiles = { [ bundleIdentifier ]: String(buildOpts.provisioningProfile) };
-                exportOptions.signingStyle = 'manual';
-            }
-
-            if (buildOpts.codeSignIdentity) {
-                exportOptions.signingCertificate = buildOpts.codeSignIdentity;
             }
 
             var exportOptionsPlist = plist.build(exportOptions);
