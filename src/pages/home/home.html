@@ -1,14 +1,13 @@
 <ion-header>
     <ion-navbar>
-        <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-        </button>
-        <ion-title>Home</ion-title>
+        <ion-title>OV Finder</ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-    <h6 padding>Woah, so this here is a work in progress - it will feature the ability to detect your location and base the store results off that in a future version. <br> For now the results below are all hard coded based on a location in Toronto.</h6>
+    <h6 padding>Woah, so this here is a work in progress - it will feature the ability to detect your location and base the store results
+        off that in a future version.
+        <br> For now the results below are all hard coded based on a location in Toronto.</h6>
     <ion-card>
         <ion-card-content>
             <ion-card-title>
@@ -22,8 +21,21 @@
     <h3 padding>Locations this fine beer is found: </h3>
 
     <ion-list>
-        <button ion-item *ngFor="let beer of (beers | async)?.result" (click)="openOVDetails(beer)">
-            {{ beer.name + " - " + " QTY: " + beer.quantity }} 
-        </button>
+        <ion-card *ngFor="let beer of (beers | async)?.result">
+            <button ion-item (click)="openOVDetails(beer)">
+                <ion-fab right top>
+                    <button ion-fab>
+                        <ion-icon name="pin"></ion-icon>
+                    </button>
+                </ion-fab>
+                <ion-card-content>
+                    <ion-card-title>
+                        {{ beer.name }}
+                    </ion-card-title>
+                    <p>{{ beer.id }}</p>
+                    <p>{{ " QTY: " + beer.quantity }}</p>
+                </ion-card-content>
+            </button>
+        </ion-card>
     </ion-list>
 </ion-content>

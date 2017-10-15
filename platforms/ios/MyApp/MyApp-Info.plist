@@ -61,11 +61,18 @@
           <key>NSExceptionAllowsInsecureHTTPLoads</key>
           <true/>
         </dict>
+        <key>192.168.2.54</key>
+        <dict>
+          <key>NSExceptionAllowsInsecureHTTPLoads</key>
+          <true/>
+        </dict>
       </dict>
       <key>NSAllowsArbitraryLoads</key>
       <true/>
     </dict>
     <key>UILaunchStoryboardName</key>
     <string>CDVLaunchScreen</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>To locate you</string>
   </dict>
 </plist>

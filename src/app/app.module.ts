@@ -1,38 +1,46 @@
+import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+
+import { AboutPage } from '../pages/about/about';
+import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Geolocation } from '@ionic-native/geolocation';
+import { ApiProvider } from '../providers/api/api';
 import { HttpModule } from '@angular/http';
-import { ApiProvider } from './../providers/api/api';
 
 @NgModule({
-  declarations: [
-    MyApp,
-    HomePage,
-    ListPage
-  ],
-  imports: [
-    BrowserModule,
-    HttpModule,
-    IonicModule.forRoot(MyApp),
-  ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    HomePage,
-    ListPage
-  ],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    ApiProvider,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
-  ]
+    declarations: [
+        MyApp,
+        AboutPage,
+        ContactPage,
+        HomePage,
+        TabsPage
+    ],
+    imports: [
+        BrowserModule,
+        HttpModule,
+        IonicModule.forRoot(MyApp)
+    ],
+    bootstrap: [IonicApp],
+    entryComponents: [
+        MyApp,
+        AboutPage,
+        ContactPage,
+        HomePage,
+        TabsPage
+    ],
+    providers: [
+        StatusBar,
+        SplashScreen,
+        Geolocation,
+        { provide: ErrorHandler, useClass: IonicErrorHandler },
+        ApiProvider
+    ]
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,6 +1,6 @@
-import { ApiProvider } from './../../providers/api/api';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { ApiProvider } from './../../providers/api/api';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
@@ -26,5 +26,4 @@ export class HomePage {
     openOVDetails(beer) {
         this.navCtrl.push('OvStoreDetailsPage', { beer: beer });
     }
-
 }
