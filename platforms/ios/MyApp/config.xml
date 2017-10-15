@@ -40,7 +40,11 @@
     <name>MyApp</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+<<<<<<< HEAD
     <content original-src="index.html" src="http://192.168.0.6:8100" />
+=======
+    <content src="http://192.168.0.104:8100" />
+>>>>>>> parent of 910a9c4... XML
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
