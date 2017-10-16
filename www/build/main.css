@@ -25511,3 +25511,8 @@ ion-navbar.toolbar {
   height: calc(46px + constant(safe-area-inset-top));
   min-height: calc(46px + constant(safe-area-inset-top));
 }
+
+page-ov-store-details #map {
+  width: 100%;
+  height: 300px;
+}

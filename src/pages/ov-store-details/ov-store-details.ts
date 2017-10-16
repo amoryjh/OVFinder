@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
@@ -7,7 +7,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
     templateUrl: 'ov-store-details.html',
 })
 export class OvStoreDetailsPage {
+    @ViewChild('map') mapElement;
+
     beer: any;
+    map: any;
 
     constructor(public navCtrl: NavController, public navParams: NavParams) {
         this.beer = this.navParams.get("beer");
@@ -23,20 +26,30 @@ export class OvStoreDetailsPage {
 
         return (addressTwo == null ? addressOne : addressOne + ", " + addressTwo);
     }
-    
-    // initMap() {
-    //     var uluru = { lat: -25.363, lng: 131.044 };
-    //     var map = new google.maps.Map(document.getElementById('map'), {
-    //         zoom: 4,
-    //         center: uluru
-    //     });
-    //     var marker = new google.maps.Marker({
-    //         position: uluru,
-    //         map: map
-    //     });
-    // }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad OvStoreDetailsPage');
+        this.initMap();
+    }
+
+    initMap() {
+        let storeLat = this.beer.latitude;
+        let storeLng = this.beer.longitude;
+
+        let latLng = new google.maps.LatLng(storeLat, storeLng);
+
+        let mapOptions = {
+            center: latLng,
+            zoom: 15,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+
+        let marker = new google.maps.Marker({
+            position: latLng,
+            title: 'Map Test!'
+        });
+
+        this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+        marker.setMap(this.map);
     }
 }

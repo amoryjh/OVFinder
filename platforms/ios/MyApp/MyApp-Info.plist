@@ -73,6 +73,28 @@
     <key>UILaunchStoryboardName</key>
     <string>CDVLaunchScreen</string>
     <key>NSLocationWhenInUseUsageDescription</key>
-    <string>To locate you</string>
+    <string>Show your location on the map</string>
+    <key>Google Maps API Key</key>
+    <string>AIzaSyAdjTHzTNjOT-oBQisYax2GByIoDlDztQw</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Trace your location on the map</string>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+      <string>googlechromes</string>
+      <string>comgooglemaps</string>
+    </array>
+    <key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleURLName</key>
+        <string>io.ionic.starter</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>io.ionic.starter</string>
+        </array>
+      </dict>
+    </array>
   </dict>
 </plist>

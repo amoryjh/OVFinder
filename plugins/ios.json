@@ -28,10 +28,19 @@
     "cordova-plugin-geolocation": {
       "GEOLOCATION_USAGE_DESCRIPTION": "To locate you",
       "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "cordova-plugin-googlemaps": {
+      "API_KEY_FOR_IOS": "AIzaSyAdjTHzTNjOT-oBQisYax2GByIoDlDztQw",
+      "LOCATION_WHEN_IN_USE_DESCRIPTION": "Show your location on the map",
+      "LOCATION_ALWAYS_USAGE_DESCRIPTION": "Trace your location on the map",
+      "PACKAGE_NAME": "io.ionic.starter"
     }
   },
   "dependent_plugins": {
     "cordova-plugin-compat": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "com.googlemaps.ios": {
       "PACKAGE_NAME": "io.ionic.starter"
     }
   }
