@@ -5,7 +5,7 @@
 </ion-header>
 <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApYxtYSmp_GmQpv7V9sgk5UwUG6ukj1nM&callback=initMap"></script> -->
 
-<ion-content padding>
+<ion-content>
     <ion-card>
         <ion-card-content>
             <div #map id="map"></div>
@@ -16,17 +16,13 @@
                 {{ formatStoreAddress(beer) }}
             </p>
             <p>
-                {{ beer.city }}
+                Distance: {{ convertMetersToKM(beer) }}
             </p>
-            <p>
-                {{"Distance: " + convertMetersToKM(beer.distance_in_meters)}}
-            </p>
-
             <p>
                 {{ beer.telephone }}
             </p>
             <p>
-                {{"Has bilingual services: " + beer.has_bilingual_services }}
+                Has bilingual services: {{ beer.has_bilingual_services }}
             </p>
         </ion-card-content>
     </ion-card>

@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { FormatHelperProvider } from './../../providers/format-helper/format-helper';
 
 @IonicPage()
 @Component({
@@ -12,24 +13,20 @@ export class OvStoreDetailsPage {
     beer: any;
     map: any;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, public formatHelper: FormatHelperProvider) {
         this.beer = this.navParams.get("beer");
     }
 
+    ionViewDidLoad() {
+        this.initMap();
+    }
+
     convertMetersToKM(beer) {
-        return (beer / 1000).toFixed(2) + "KM";
+        return this.formatHelper.convertMetersToKM(beer);
     }
 
     formatStoreAddress(beer) {
-        var addressOne = beer.address_line_1,
-            addressTwo = beer.address_line_2;
-
-        return (addressTwo == null ? addressOne : addressOne + ", " + addressTwo);
-    }
-
-    ionViewDidLoad() {
-        console.log('ionViewDidLoad OvStoreDetailsPage');
-        this.initMap();
+        return this.formatHelper.formatStoreAddress(beer);
     }
 
     initMap() {
@@ -44,12 +41,13 @@ export class OvStoreDetailsPage {
             mapTypeId: google.maps.MapTypeId.ROADMAP
         }
 
+        this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+
         let marker = new google.maps.Marker({
             position: latLng,
             title: 'Map Test!'
         });
 
-        this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
         marker.setMap(this.map);
     }
 }

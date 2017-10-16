@@ -11,9 +11,9 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Geolocation } from '@ionic-native/geolocation';
-import { GoogleMaps } from '@ionic-native/google-maps';
 import { ApiProvider } from '../providers/api/api';
 import { HttpModule } from '@angular/http';
+import { FormatHelperProvider } from '../providers/format-helper/format-helper';
 
 @NgModule({
     declarations: [
@@ -40,9 +40,9 @@ import { HttpModule } from '@angular/http';
         StatusBar,
         SplashScreen,
         Geolocation,
-        GoogleMaps,
         { provide: ErrorHandler, useClass: IonicErrorHandler },
-        ApiProvider
+        ApiProvider,
+        FormatHelperProvider
     ]
 })
 export class AppModule { }
