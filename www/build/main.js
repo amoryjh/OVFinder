@@ -36,10 +36,9 @@ var FormatHelperProvider = (function () {
 }());
 FormatHelperProvider = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]])
 ], FormatHelperProvider);
 
-var _a;
 //# sourceMappingURL=format-helper.js.map
 
 /***/ }),
@@ -236,22 +235,6 @@ var HomePage = (function () {
     }
     HomePage.prototype.openOVDetails = function (beer) {
         this.navCtrl.push('OvStoreDetailsPage', { beer: beer });
-    };
-    HomePage.prototype.initMap = function (beer) {
-        var storeLat = this.beer.latitude;
-        var storeLng = this.beer.longitude;
-        var latLng = new google.maps.LatLng(storeLat, storeLng);
-        var mapOptions = {
-            center: latLng,
-            zoom: 15,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        var marker = new google.maps.Marker({
-            position: latLng,
-            title: 'Map Test!'
-        });
-        this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-        marker.setMap(this.map);
     };
     HomePage.prototype.convertMetersToKM = function (beer) {
         return this.formatHelper.convertMetersToKM(beer);
