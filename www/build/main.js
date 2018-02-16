@@ -204,8 +204,9 @@ ContactPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_api_api__ = __webpack_require__(200);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_format_helper_format_helper__ = __webpack_require__(102);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map__ = __webpack_require__(78);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_geolocation__ = __webpack_require__(201);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map__ = __webpack_require__(78);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -220,19 +221,72 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var HomePage = (function () {
-    function HomePage(navCtrl, apiProvider, formatHelper) {
+    // public beers: any;
+    function HomePage(navCtrl, apiProvider, formatHelper, geolocation) {
         var _this = this;
         this.navCtrl = navCtrl;
         this.apiProvider = apiProvider;
         this.formatHelper = formatHelper;
-        this.beers = this.apiProvider.getBeers();
+        this.geolocation = geolocation;
+        // this.beers = this.apiProvider.getBeers();
         this.ovs = this.apiProvider.getOV();
         this.ovs.subscribe(function (data) {
             _this.ovName = data.result.name;
             _this.ovTasting = data.result.varietal;
         });
     }
+    HomePage.prototype.ionViewDidLoad = function () {
+        // this.loadMap();
+        this.loadBeers();
+        // this.loadPeople();
+    };
+    HomePage.prototype.loadBeers = function () {
+        var _this = this;
+        this.apiProvider.getBeers()
+            .then(function (data) {
+            _this.beers = data;
+        });
+    };
+    // loadPeople() {
+    //     this.apiProvider.getPeople()
+    //         .then(data => {
+    //             this.people = data;
+    //         });
+    // }
+    HomePage.prototype.loadMap = function () {
+        var _this = this;
+        this.geolocation.getCurrentPosition().then(function (position) {
+            var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            var mapOptions = {
+                center: latLng,
+                zoom: 15,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            _this.map = new google.maps.Map(_this.mapElement.nativeElement, mapOptions);
+        }).then(function (success) {
+            _this.addMarker();
+        });
+    };
+    HomePage.prototype.addInfoWindow = function (marker, content) {
+        var _this = this;
+        var infoWindow = new google.maps.InfoWindow({
+            content: content
+        });
+        google.maps.event.addListener(marker, 'click', function () {
+            infoWindow.open(_this.map, marker);
+        });
+    };
+    HomePage.prototype.addMarker = function () {
+        var marker = new google.maps.Marker({
+            map: this.map,
+            animation: google.maps.Animation.DROP,
+            position: this.map.getCenter()
+        });
+        var content = "<p>Your Location</p>";
+        this.addInfoWindow(marker, content);
+    };
     HomePage.prototype.openOVDetails = function (beer) {
         this.navCtrl.push('OvStoreDetailsPage', { beer: beer });
     };
@@ -246,16 +300,16 @@ var HomePage = (function () {
 }());
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_14" /* ViewChild */])('map'),
-    __metadata("design:type", Object)
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */]) === "function" && _a || Object)
 ], HomePage.prototype, "mapElement", void 0);
 HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"/Users/joshhanson/Documents/OVFinder/src/pages/home/home.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>OV Finder</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n    <h4 padding>Locations near you:</h4>\n    <ion-list>\n        <ion-card *ngFor="let store of (beers | async)?.result">\n            <div #map id="map"></div>\n            <button ion-item (click)="openOVDetails(store)">\n                <ion-card-content>\n                    <ion-card-title>\n                        {{ store.name }}\n                    </ion-card-title>\n                    <p>\n                        {{ formatStoreAddress(store) }}\n                    </p>\n                    <p>\n                        Distance: {{ convertMetersToKM(store) }}\n                    </p>\n                    <p>\n                        Quantity: {{store.quantity }}\n                    </p>\n                </ion-card-content>\n            </button>\n        </ion-card>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/joshhanson/Documents/OVFinder/src/pages/home/home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"/Users/joshhanson/Documents/OVFinder/src/pages/home/home.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>OV Finder</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n    <h1 padding>Find Your Location:</h1>\n    <div #map id="map" style="height:300px"></div> \n\n    <ion-list>\n        <ion-card *ngFor="let store of (beers | async)?.result">\n            <div #map id="map"></div>\n            <button ion-item (click)="openOVDetails(store)">\n                <ion-card-content>\n                    <ion-card-title>\n                        {{ store.name }}\n                    </ion-card-title>\n                    <p>\n                        {{ formatStoreAddress(store) }}\n                    </p>\n                    <p>\n                        Distance: {{ convertMetersToKM(store) }}\n                    </p>\n                    <p>\n                        Quantity: {{store.quantity }}\n                    </p>\n                </ion-card-content>\n            </button>\n        </ion-card>\n    </ion-list>\n    <!-- <ion-list>\n        <ion-item *ngFor="let person of people">\n          <ion-avatar item-left>\n            <img src="{{person.picture.thumbnail}}">\n          </ion-avatar>\n          <h2>{{person.name.first}} {{person.name.last}}</h2>\n          <p>{{person.email}}</p>\n        </ion-item>\n      </ion-list> -->\n</ion-content>'/*ion-inline-end:"/Users/joshhanson/Documents/OVFinder/src/pages/home/home.html"*/
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__providers_api_api__["a" /* ApiProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_api_api__["a" /* ApiProvider */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__providers_format_helper_format_helper__["a" /* FormatHelperProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_format_helper_format_helper__["a" /* FormatHelperProvider */]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_api_api__["a" /* ApiProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_api_api__["a" /* ApiProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__providers_format_helper_format_helper__["a" /* FormatHelperProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_format_helper_format_helper__["a" /* FormatHelperProvider */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _e || Object])
 ], HomePage);
 
-var _a, _b, _c;
+var _a, _b, _c, _d, _e;
 //# sourceMappingURL=home.js.map
 
 /***/ }),
@@ -290,14 +344,39 @@ var ApiProvider = (function () {
     }
     ApiProvider.prototype.getBeers = function () {
         var _this = this;
-        this.geolocation.getCurrentPosition().then(function (res) {
-            _this.lat = res.coords.latitude;
-            _this.lon = res.coords.longitude;
-            console.log(_this.lat + " " + _this.lon);
-        }, function (err) {
-            return _this.http.get('https://lcboapi.com/stores?access_key=MDpiYTFjODVhNi1iMDY4LTExZTctOGNhMS0yYjM2ZTNlMDFjY2E6c2J4eVVBVWdFbk1zNUhvUG9ralQ3ZmQ3N2Q1N0FOYzBZY0RL&lat=43.65838&lon=-79.44335&product_id=460881').map(function (res) { return res.json(); });
+        if (this.data) {
+            return Promise.resolve(this.data);
+        }
+        return new Promise(function (resolve) {
+            _this.http.get('https://lcboapi.com/stores?access_key=MDpiYTFjODVhNi1iMDY4LTExZTctOGNhMS0yYjM2ZTNlMDFjY2E6c2J4eVVBVWdFbk1zNUhvUG9ralQ3ZmQ3N2Q1N0FOYzBZY0RL&lat=43.65838&lon=-79.44335&product_id=460881')
+                .map(function (res) { return res.json(); })
+                .subscribe(function (data) {
+                _this.data = data.results;
+                resolve(_this.data);
+            });
         });
-        return this.http.get('https://lcboapi.com/stores?access_key=MDpiYTFjODVhNi1iMDY4LTExZTctOGNhMS0yYjM2ZTNlMDFjY2E6c2J4eVVBVWdFbk1zNUhvUG9ralQ3ZmQ3N2Q1N0FOYzBZY0RL&lat=43.65838&lon=-79.44335&product_id=460881').map(function (res) { return res.json(); });
+        // this.geolocation.getCurrentPosition().then((res) => {
+        //     this.lat = res.coords.latitude;
+        //     this.lon = res.coords.longitude;
+        //     console.log(this.lat + " " + this.lon);
+        // }, (err) => {
+        //     return this.http.get('https://lcboapi.com/stores?access_key=MDpiYTFjODVhNi1iMDY4LTExZTctOGNhMS0yYjM2ZTNlMDFjY2E6c2J4eVVBVWdFbk1zNUhvUG9ralQ3ZmQ3N2Q1N0FOYzBZY0RL&lat=43.65838&lon=-79.44335&product_id=460881').map(res => res.json());
+        // });
+    };
+    ApiProvider.prototype.getPeople = function () {
+        var _this = this;
+        if (this.data) {
+            // already loaded data
+            return Promise.resolve(this.data);
+        }
+        return new Promise(function (resolve) {
+            _this.http.get('https://randomuser.me/api/?results=10')
+                .map(function (res) { return res.json(); })
+                .subscribe(function (data) {
+                _this.data = data.results;
+                resolve(_this.data);
+            });
+        });
     };
     ApiProvider.prototype.getOV = function () {
         return this.http.get('https://lcboapi.com/products/460881?access_key=MDpiYTFjODVhNi1iMDY4LTExZTctOGNhMS0yYjM2ZTNlMDFjY2E6c2J4eVVBVWdFbk1zNUhvUG9ralQ3ZmQ3N2Q1N0FOYzBZY0RL').map(function (res) { return res.json(); });

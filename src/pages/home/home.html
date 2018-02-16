@@ -5,7 +5,9 @@
 </ion-header>
 
 <ion-content padding>
-    <h4 padding>Locations near you:</h4>
+    <h1 padding>Find Your Location:</h1>
+    <div #map id="map" style="height:300px"></div> 
+
     <ion-list>
         <ion-card *ngFor="let store of (beers | async)?.result">
             <div #map id="map"></div>
@@ -27,4 +29,13 @@
             </button>
         </ion-card>
     </ion-list>
+    <!-- <ion-list>
+        <ion-item *ngFor="let person of people">
+          <ion-avatar item-left>
+            <img src="{{person.picture.thumbnail}}">
+          </ion-avatar>
+          <h2>{{person.name.first}} {{person.name.last}}</h2>
+          <p>{{person.email}}</p>
+        </ion-item>
+      </ion-list> -->
 </ion-content>
