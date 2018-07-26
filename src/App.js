@@ -49,8 +49,7 @@ class App extends Component {
         return (
             <div className="App">
                 <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
-                    <h1 className="App-title">OV Finder - React</h1>
+                    <h1 className="App-title">OV Finder - Just Say OV</h1>
                 </header>
 
                 <MapContainer locations={this.state.locations} google={this.props.google} />
@@ -65,7 +64,6 @@ class App extends Component {
                         <option id="900365" value="900365">12 Case - Bottles</option>
                         <option id="360446" value="360446">15 Case - Cans</option>
                         <option id="902056" value="902056">24 Case - Bottles</option>
-
                     </select>
                     {this.state.stores}
                 </ul>
