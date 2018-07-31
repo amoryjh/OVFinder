@@ -1,9 +1,19 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react'
+import Link from 'gatsby-link'
 import { GoogleApiWrapper } from 'google-maps-react'
-import './App.css';
-import MapContainer from './MapContainer'
+import MapContainer from '../Components/MapContainer'
 
+// const IndexPage = () => (
+//   <div>
+    
+//     <h1>Hi people</h1>
+//     <p>Welcome to your new Gatsby site.</p>
+//     <p>Now go build something great.</p>
+//     <Link to="/page-2/">Go to page 2</Link>
+//   </div>
+// )
+
+// export default IndexPage
 class App extends Component {
     constructor() {
         super();
@@ -48,23 +58,18 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <header className="App-header">
-                    <h1 className="App-title">OV Finder - Just Say OV</h1>
-                </header>
-
                 <MapContainer locations={this.state.locations} google={this.props.google} />
-
-
                 <ul className="store-list">
-                    <br />
-                    <br /><br />
-                    <h2>Select Your Case:</h2>
-                    <select onChange={this.updateList} value={this.state.prodID}>
-                        <option id="460881" value="460881">6 Case - Tall Cans</option>
-                        <option id="900365" value="900365">12 Case - Bottles</option>
-                        <option id="360446" value="360446">15 Case - Cans</option>
-                        <option id="902056" value="902056">24 Case - Bottles</option>
-                    </select>
+                    <br /><br /><br />
+                    <div className="store-sort-head">
+                        <h2>Select Your Case:</h2>
+                        <select onChange={this.updateList} value={this.state.prodID}>
+                            <option id="460881" value="460881">6 Case - Tall Cans</option>
+                            <option id="900365" value="900365">12 Case - Bottles</option>
+                            <option id="360446" value="360446">15 Case - Cans</option>
+                            <option id="902056" value="902056">24 Case - Bottles</option>
+                        </select>
+                    </div>
                     {this.state.stores}
                 </ul>
             </div>
