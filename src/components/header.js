@@ -4,7 +4,7 @@ import Link from 'gatsby-link'
 const Header = ({ siteTitle }) => (
   <div
     style={{
-      background: 'rebeccapurple'
+      background: '#233a85'
     }}
   >
     <div
@@ -20,12 +20,17 @@ const Header = ({ siteTitle }) => (
           style={{
             color: 'white',
             textDecoration: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            justifyContent: 'center'
+            
           }}
         >
-          <span style={{textDecoration: 'line-through'}}>{siteTitle}</span>
-          <br/>
-          OV Finder
+          <span style={{width: '100%'}}> <span className="prem"> Premium</span> <span className="prem"> Quality</span> </span> 
+          <span className="ov">OV </span> <span style={{paddingLeft: '15px',fontFamily:'Great Vibes', fontSize: 38, color: '#fdc228'}}> (Finder)</span>
         </Link>
+        <p style={{color: '#fff', fontSize: 20, marginTop: 10}}>Just say OV</p>
       </h1>
     </div>
   </div>
